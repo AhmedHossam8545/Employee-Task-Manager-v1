@@ -1,0 +1,1031 @@
+{
+	"info": {
+		"_postman_id": "employee-task-manager-api",
+		"name": "Employee Task Manager API",
+		"description": "A comprehensive API for managing employees and their tasks with time tracking capabilities",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "employee-task-manager"
+	},
+	"item": [
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Get All Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						},
+						"description": "Retrieve all employees from the database"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/employees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"employees"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"employee123\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@company.com\",\n    \"position\": \"Software Developer\"\n  },\n  {\n    \"id\": \"employee456\",\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane.smith@company.com\",\n    \"position\": \"Project Manager\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Employee by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "employee123",
+									"description": "Employee ID"
+								}
+							]
+						},
+						"description": "Retrieve a specific employee by their ID"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/employees/employee123",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"employees",
+										"employee123"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"employee123\",\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@company.com\",\n  \"position\": \"Software Developer\"\n}"
+						},
+						{
+							"name": "Not Found Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/employees/nonexistent",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"employees",
+										"nonexistent"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Employee not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@company.com\",\n  \"position\": \"Software Developer\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						},
+						"description": "Create a new employee. Name and email are required fields."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@company.com\",\n  \"position\": \"Software Developer\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/employees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"employees"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"generated-id-123\",\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@company.com\",\n  \"position\": \"Software Developer\"\n}"
+						},
+						{
+							"name": "Validation Error Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/employees",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"employees"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Missing required fields: name, email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Employee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe Updated\",\n  \"email\": \"john.doe.updated@company.com\",\n  \"position\": \"Senior Software Developer\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/employees/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "employee123",
+									"description": "Employee ID"
+								}
+							]
+						},
+						"description": "Update an existing employee's information"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe Updated\",\n  \"email\": \"john.doe.updated@company.com\",\n  \"position\": \"Senior Software Developer\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/employees/employee123",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"employees",
+										"employee123"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"employee123\",\n  \"name\": \"John Doe Updated\",\n  \"email\": \"john.doe.updated@company.com\",\n  \"position\": \"Senior Software Developer\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Employee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "employee123",
+									"description": "Employee ID"
+								}
+							]
+						},
+						"description": "Delete an employee from the database"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/employees/employee123",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"employees",
+										"employee123"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get Employee Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/:id/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								":id",
+								"tasks"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "employee123",
+									"description": "Employee ID"
+								}
+							]
+						},
+						"description": "Get all tasks assigned to a specific employee"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/employees/employee123/tasks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"employees",
+										"employee123",
+										"tasks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"task123\",\n    \"employeeId\": \"employee123\",\n    \"title\": \"Develop API\",\n    \"description\": \"Create REST API endpoints\",\n    \"startTime\": null,\n    \"endTime\": null\n  },\n  {\n    \"id\": \"task456\",\n    \"employeeId\": \"employee123\",\n    \"title\": \"Write Tests\",\n    \"description\": \"Create unit tests for the API\",\n    \"startTime\": \"2024-01-15T10:00:00.000Z\",\n    \"endTime\": null\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Employee with Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/:id/with-tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								":id",
+								"with-tasks"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "employee123",
+									"description": "Employee ID"
+								}
+							]
+						},
+						"description": "Get employee information along with all their assigned tasks"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/employees/employee123/with-tasks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"employees",
+										"employee123",
+										"with-tasks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"employee123\",\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@company.com\",\n  \"position\": \"Software Developer\",\n  \"tasks\": [\n    {\n      \"id\": \"task123\",\n      \"employeeId\": \"employee123\",\n      \"title\": \"Develop API\",\n      \"description\": \"Create REST API endpoints\",\n      \"startTime\": null,\n      \"endTime\": null\n    },\n    {\n      \"id\": \"task456\",\n      \"employeeId\": \"employee123\",\n      \"title\": \"Write Tests\",\n      \"description\": \"Create unit tests for the API\",\n      \"startTime\": \"2024-01-15T10:00:00.000Z\",\n      \"endTime\": null\n    }\n  ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Employee management endpoints"
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						},
+						"description": "Retrieve all tasks from the database"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/tasks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"task123\",\n    \"employeeId\": \"employee123\",\n    \"title\": \"Develop API\",\n    \"description\": \"Create REST API endpoints\",\n    \"startTime\": null,\n    \"endTime\": null\n  },\n  {\n    \"id\": \"task456\",\n    \"employeeId\": \"employee123\",\n    \"title\": \"Write Tests\",\n    \"description\": \"Create unit tests for the API\",\n    \"startTime\": \"2024-01-15T10:00:00.000Z\",\n    \"endTime\": null\n  }\n]"
+						},
+						{
+							"name": "No Tasks Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/tasks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"No Tasks Yet\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Task by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "task123",
+									"description": "Task ID"
+								}
+							]
+						},
+						"description": "Retrieve a specific task by its ID"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/tasks/task123",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"task123"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"task123\",\n  \"employeeId\": \"employee123\",\n  \"title\": \"Develop API\",\n  \"description\": \"Create REST API endpoints\",\n  \"startTime\": null,\n  \"endTime\": null\n}"
+						},
+						{
+							"name": "Not Found Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/tasks/nonexistent",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"nonexistent"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Task not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Tasks by Employee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/employee/:employeeId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"employee",
+								":employeeId"
+							],
+							"variable": [
+								{
+									"key": "employeeId",
+									"value": "employee123",
+									"description": "Employee ID"
+								}
+							]
+						},
+						"description": "Get all tasks assigned to a specific employee"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/tasks/employee/employee123",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"employee",
+										"employee123"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"task123\",\n    \"employeeId\": \"employee123\",\n    \"title\": \"Develop API\",\n    \"description\": \"Create REST API endpoints\",\n    \"startTime\": null,\n    \"endTime\": null\n  },\n  {\n    \"id\": \"task456\",\n    \"employeeId\": \"employee123\",\n    \"title\": \"Write Tests\",\n    \"description\": \"Create unit tests for the API\",\n    \"startTime\": \"2024-01-15T10:00:00.000Z\",\n    \"endTime\": null\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employeeId\": \"employee123\",\n  \"title\": \"Develop API\",\n  \"description\": \"Create REST API endpoints for the new feature\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						},
+						"description": "Create a new task and assign it to an employee"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"employeeId\": \"employee123\",\n  \"title\": \"Develop API\",\n  \"description\": \"Create REST API endpoints for the new feature\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/tasks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"generated-task-id\",\n  \"employeeId\": \"employee123\",\n  \"title\": \"Develop API\",\n  \"description\": \"Create REST API endpoints for the new feature\",\n  \"startTime\": null,\n  \"endTime\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Develop API - Updated\",\n  \"description\": \"Create REST API endpoints with additional features\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "task123",
+									"description": "Task ID"
+								}
+							]
+						},
+						"description": "Update an existing task's information"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Develop API - Updated\",\n  \"description\": \"Create REST API endpoints with additional features\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/tasks/task123",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"task123"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"task123\",\n  \"employeeId\": \"employee123\",\n  \"title\": \"Develop API - Updated\",\n  \"description\": \"Create REST API endpoints with additional features\",\n  \"startTime\": null,\n  \"endTime\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Start Task",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/:id/start",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								":id",
+								"start"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "task123",
+									"description": "Task ID"
+								}
+							]
+						},
+						"description": "Start time tracking for a task"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/tasks/task123/start",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"task123",
+										"start"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Task started\",\n  \"task\": {\n    \"id\": \"task123\",\n    \"employeeId\": \"employee123\",\n    \"title\": \"Develop API\",\n    \"description\": \"Create REST API endpoints\",\n    \"startTime\": \"2024-01-15T10:00:00.000Z\",\n    \"endTime\": null\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Stop Task",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/:id/stop",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								":id",
+								"stop"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "task123",
+									"description": "Task ID"
+								}
+							]
+						},
+						"description": "Stop time tracking for a task"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/tasks/task123/stop",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"task123",
+										"stop"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Task stopped\",\n  \"task\": {\n    \"id\": \"task123\",\n    \"employeeId\": \"employee123\",\n    \"title\": \"Develop API\",\n    \"description\": \"Create REST API endpoints\",\n    \"startTime\": \"2024-01-15T10:00:00.000Z\",\n    \"endTime\": \"2024-01-15T12:30:00.000Z\"\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "task123",
+									"description": "Task ID"
+								}
+							]
+						},
+						"description": "Delete a task from the database"
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/tasks/task123",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"task123"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"description": "Task management endpoints with time tracking capabilities"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string",
+			"description": "Base URL for the API"
+		}
+	]
+} 
